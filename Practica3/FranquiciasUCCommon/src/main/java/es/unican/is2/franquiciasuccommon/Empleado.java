@@ -3,6 +3,7 @@ package es.unican.is2.franquiciasuccommon;
 
 
 import java.time.LocalDate;
+import java.util.Objects;
 /**
  * Clase que representa un empleado de la franquicia, 
  * con sus datos personales 
@@ -37,16 +38,18 @@ public class Empleado {
 	 * Retorna el sueldo bruto del empleado
 	 */
 	public double sueldoBruto() {
-		// TODO
-		double sueldo = 0;
 		double sueldoBase = 0;
-		if (categoria == Categoria.ENCARGADO) {
+		switch (categoria) {
+		case ENCARGADO:
 			sueldoBase = 2000;
-		} else if (categoria == Categoria.VENDEDOR) {
+			break;
+		case VENDEDOR:
 			sueldoBase = 1500;
-		} else if (categoria == Categoria.AUXILIAR) {
+			break;
+		case AUXILIAR:
 			sueldoBase = 1000;
-		}
+			break;
+	}
 		
 		int antiguedad = LocalDate.now().getYear() - fechaContratacion.getYear();
 
@@ -60,9 +63,9 @@ public class Empleado {
             complementoAntiguedad = 50;
         }
         
-        sueldo = sueldoBase + complementoAntiguedad;
+        double sueldo = sueldoBase + complementoAntiguedad;
         if (baja) {
-        	sueldo = sueldo * 0.75;
+        	sueldo *= 0.75;
         }
 		return sueldo;
 	}
@@ -142,6 +145,19 @@ public class Empleado {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Empleado empleado = (Empleado) o;
+		return Objects.equals(DNI, empleado.DNI);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(DNI);
 	}
 	
 }

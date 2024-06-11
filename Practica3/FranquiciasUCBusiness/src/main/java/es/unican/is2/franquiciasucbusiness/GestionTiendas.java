@@ -1,16 +1,17 @@
 package es.unican.is2.franquiciasucbusiness;
+
 import es.unican.is2.franquiciasuccommon.DataAccessException;
 import es.unican.is2.franquiciasuccommon.IGestionTiendas;
 import es.unican.is2.franquiciasuccommon.ITiendasDAO;
 import es.unican.is2.franquiciasuccommon.OperacionNoValidaException;
 import es.unican.is2.franquiciasuccommon.Tienda;
-import es.unican.is2.franquiciasuccommon.TiendasDAO;
+import es.unican.is2.franquiciasucdao.TiendasDAO;
 
 public class GestionTiendas implements IGestionTiendas {
 	private ITiendasDAO IT;
 
 
-	public GestionTiendas(TiendasDAO tiendasDAO) {
+	public GestionTiendas(ITiendasDAO tiendasDAO) {
 		IT = tiendasDAO;
 	}
 
@@ -26,9 +27,13 @@ public class GestionTiendas implements IGestionTiendas {
 	@Override
 	public Tienda eliminarTienda(String nombre) throws OperacionNoValidaException, DataAccessException {
 		Tienda t = IT.tiendaPorNombre(nombre);
-		if(t.getEmpleados() != null) {
-			throw new OperacionNoValidaException(null);
-		}
+		if (t == null) {
+            return null;
+        }
+		if (t.getEmpleados() != null && !t.getEmpleados().isEmpty()) {
+	            throw new OperacionNoValidaException("La tienda tiene empleados asignados");
+	        }
+		IT.eliminarTienda(t.getId());
 		return t;
 	}
 

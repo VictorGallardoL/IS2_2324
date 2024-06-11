@@ -26,6 +26,16 @@
     		<version>1.0-SNAPSHOT</version>
   
 		</dependency>
+        <dependency>
+        	<groupId>es.unican.is2</groupId>
+        	<artifactId>FranquiciasUCDAO</artifactId>
+        	<version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+        	<groupId>es.unican.is2</groupId>
+        	<artifactId>FranquiciasUCCommon</artifactId>
+        	<version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 	
 	<build>
@@ -40,7 +50,7 @@
 		</descriptorRefs>
 		<archive>
 			<manifest>
-				<mainClass>es.unican.is2.FranquiciasUCMain.Runner</mainClass>
+				<mainClass>es.unican.is2.franquiciasucmain.Runner</mainClass>
 			</manifest>
 		</archive>
 		</configuration>

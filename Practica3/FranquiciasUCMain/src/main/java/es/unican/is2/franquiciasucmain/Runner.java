@@ -1,4 +1,5 @@
 package es.unican.is2.franquiciasucmain;
+
 import es.unican.is2.franquiciasucbusiness.GestionEmpleados;
 import es.unican.is2.franquiciasucbusiness.GestionTiendas;
 import es.unican.is2.franquiciasucdao.EmpleadosDAO;
@@ -28,5 +29,4 @@ public class Runner {
 	
 		
 	}
-
 }
